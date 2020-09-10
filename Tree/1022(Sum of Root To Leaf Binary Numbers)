@@ -1,0 +1,22 @@
+class Solution {
+    int sum;
+    public int sumRootToLeaf(TreeNode root) {
+        String path="";
+        if(root==null)return sum;
+        dfs(root,path);
+        return sum;
+    }
+    public void dfs(TreeNode node,String path){
+        path+=String.valueOf(node.val);
+        if(node.left==null && node.right==null){
+            sum+=(int)Integer.parseInt(path,2);
+            return;
+        }
+        if(node.left!=null){
+            dfs(node.left,path);
+        }
+        if(node.right!=null){
+            dfs(node.right,path);
+        }
+    }
+}

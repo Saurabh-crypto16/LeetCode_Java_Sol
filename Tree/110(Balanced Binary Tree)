@@ -1,0 +1,25 @@
+//we traverse the tree from bottom and move up hence time complexity is O(n)
+
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(heightBal(root)!=-1)
+            return true;
+        else
+            return false;
+    }
+    public int heightBal(TreeNode node){
+        if(node==null)
+            return 0;
+        if(node.left==null && node.right==null) //leaf node
+            return 1;
+        int lh=heightBal(node.left);  //height of left subtree
+        if(lh==-1)
+            return -1;
+        int rh=heightBal(node.right);   //height of right subtree
+        if(rh==-1)
+            return -1;
+        if(Math.abs(lh-rh)>1)   //checking for balance
+            return -1;
+        return Math.max(lh,rh)+1; //returning height
+    }
+}

@@ -1,0 +1,43 @@
+//recursive approach and faster
+
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        return leftNodeSum(root,false);
+    }
+    public int leftNodeSum(TreeNode node,boolean isLeafLeft){
+        if(node==null)
+            return 0;
+        if(node.left==null && node.right==null && isLeafLeft){
+            return node.val;
+        }
+        return leftNodeSum(node.left,true)+leftNodeSum(node.right,false);
+    }
+}
+
+//iterative approach
+
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root==null)return 0;
+        Queue<TreeNode> queue=new LinkedList<>();
+        int s=0;
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size=queue.size();
+            for(int i=0;i<size;i++){
+                TreeNode temp=queue.poll();
+                if(temp.left!=null){
+                    if(temp.left.left==null && temp.left.right==null){
+                        s+=temp.left.val;
+                    }
+                    System.out.print(temp.left.val+" ");
+                    queue.offer(temp.left);
+                }
+                if(temp.right!=null){
+                    queue.offer(temp.right);
+                }
+            }
+        }
+        return s;
+    }
+}

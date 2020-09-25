@@ -1,0 +1,18 @@
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        List<String> arr=new ArrayList<>();
+        int i=1;
+        for(int j=0;j<target.length;j++){
+            for(;i<=target[j];i++){
+                if(i==target[j]){
+                    arr.add("Push");
+                }
+                else{
+                    arr.add("Push");
+                    arr.add("Pop");
+                }
+            }
+        }       
+        return arr;
+    }
+}

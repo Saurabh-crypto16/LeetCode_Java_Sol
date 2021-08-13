@@ -1,0 +1,22 @@
+class Solution {
+    public int numTeams(int[] arr) {
+        int ans=0, n=arr.length;
+        for(int i=0;i<n-1;i++){
+        //ll=less than arr[i] in left
+        //lg=greater than arr[i] in left
+        //rl=less than arr[i] in right
+        //rg=less than arr[i] in right
+            int ll=0,rg=0,lg=0,rl=0;  
+            for(int j=i+1;j<n;j++){
+                if(arr[j]>arr[i])   rg++;
+                if(arr[j]<arr[i])   rl++;
+            }
+            for(int j=i-1;j>=0;j--){
+                if(arr[j]>arr[i])   lg++;
+                if(arr[j]<arr[i])   ll++;
+            }
+            ans+=(lg*rl+ll*rg);
+        }
+        return ans;
+    }
+}

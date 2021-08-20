@@ -1,0 +1,18 @@
+class Solution {
+    int ans=0;
+    public void calculate(int n, int pos, boolean[] vis){
+        if(pos>n)   ans++;  //all numbers stored 
+        for(int i=1;i<=n;i++){
+            if(!vis[i] && (pos%i==0 || i%pos==0)){
+                vis[i]=true;
+                calculate(n,pos+1,vis);
+                vis[i]=false; //backtracking
+            }
+        }
+    }
+    public int countArrangement(int n) {
+        boolean[] vis=new boolean[n+1];
+        calculate(n,1,vis);
+        return ans;
+    }
+}

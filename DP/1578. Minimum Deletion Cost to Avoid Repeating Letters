@@ -1,0 +1,25 @@
+class Solution {
+    public int minCost(String s, int[] cost) {
+        int ans=0; 
+        for(int i=0;i<s.length();i++){
+            int start=i,end=s.length()-1;
+            for(int j=start;j<s.length();j++){
+                if(s.charAt(start)!=s.charAt(j)) {   
+                    end=j-1;
+                    break;
+                }
+            }
+            //System.out.println("at i= "+i+" start= "+start+" end= "+(end));
+            if(start!=end){
+                int sum=0, max=Integer.MIN_VALUE;
+                for(int j=start;j<=end;j++){
+                    sum+=cost[j];
+                    if(cost[j]>max) max=cost[j];
+                }
+                ans+=(sum-max);
+            }
+            i=end;
+        }
+        return ans;
+    }
+}

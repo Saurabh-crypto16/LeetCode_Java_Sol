@@ -1,0 +1,49 @@
+class Solution {
+    public int longestSubarray(int[] nums) {
+        int ones[]=new int[nums.length];
+        boolean flag_one=false, flag_zero=false;
+        for(int i=0;i<nums.length;i++){
+            if(i==0){
+                if(nums[i]==1) { ones[i]=1; flag_one=true;}
+                else    {ones[i]=0; flag_zero=true;}
+            }else if(nums[i]==1){
+                ones[i]+=(ones[i-1]+1);
+                flag_one=true;
+            }else{
+                ones[i]=0;
+                flag_zero=true;
+            }
+        }
+        int ans=0;
+        
+        //for(int i: ones)    System.out.print(i+" ");
+        //System.out.println();
+        
+        for(int i=1;i<nums.length;i++){
+            if(ones[i]==0){
+                int max=ones[i-1];
+                //System.out.print("from i= "+i+" max= "+max);
+                for(int j=i+1;j<nums.length;j++){
+                    if(j==nums.length-1)   {
+                        if(ones[j]!=0)  max+=ones[j];
+                        else    max+=ones[j-1];
+                        //System.out.println(" to i= "+j+" max= "+max);
+                        break;
+                    } 
+                    if(ones[j]==0)  {   
+                        max+=ones[j-1];
+                        //System.out.println(" to i= "+j+" max= "+max);
+                        break;
+                    }
+                }
+                ans=Math.max(max,ans);
+            }
+        }
+        
+        if(ans==0)  {
+            if(flag_one) ans=nums.length-1;
+            else ans=0;
+        }
+        return ans;
+    }
+}

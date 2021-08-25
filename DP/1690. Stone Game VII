@@ -1,0 +1,20 @@
+class Solution {
+    public int stoneGameVII(int[] s) {
+        int n=s.length, sum=0;
+        int dp[][]=new int[n][n];
+        
+        for(int dpRow[]: dp)    Arrays.fill(dpRow,-1);
+        for(int i: s)   sum+=i;
+        
+        return solution(0,n-1,s,sum,dp);
+    }
+    public int solution(int left, int right, int[] s, int sum, int[][] dp){
+        if(left==right) return 0;
+        
+        if(left-right==0)   return Math.max(s[left],s[right]);
+        
+        if(dp[left][right]!=-1) return dp[left][right];
+        
+        return dp[left][right]=Math.max(sum-s[left]-solution(left+1,right,s,sum-s[left],dp), sum-s[right]-solution(left,right-1,s,sum-s[right],dp));
+    }
+}

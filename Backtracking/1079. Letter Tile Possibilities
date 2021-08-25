@@ -1,0 +1,26 @@
+class Solution {
+    String ans="";
+    Set<String> set=new HashSet<>();
+    Map<Integer, Integer> flag=new HashMap<>();
+    
+    public int numTilePossibilities(String tiles) {
+        solve(tiles);
+        
+        return set.size();
+    }
+    
+    public void solve(String s){
+        for(int i=0;i<s.length();i++){
+            if(flag.getOrDefault(i,0)!=1){
+                ans+=s.charAt(i);
+                flag.put(i,1);
+                set.add(ans);
+                solve(s);
+                
+                //backtracking
+                flag.put(i,0);
+                ans=ans.substring(0,ans.length()-1);  
+            }
+        }
+    }
+}

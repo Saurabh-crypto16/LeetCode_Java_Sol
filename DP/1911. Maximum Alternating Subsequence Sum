@@ -1,0 +1,22 @@
+class Solution {
+    long dp[][];
+    public long maxAlternatingSum(int[] nums) {
+        dp=new long[100002][2];
+        for(long[] i: dp)    Arrays.fill(i,Integer.MIN_VALUE);
+        
+        return solution(0,1,nums);
+    }
+    public long solution(int i, int flag, int[] nums){
+        if(i==nums.length)  return 0;
+        if(dp[i][flag]!=Integer.MIN_VALUE)  return dp[i][flag];
+        /*formula is we if flag is 1 we can either add or not add but if flag is 0 we substract             or not substract
+                          start
+                        /       \
+                        +4      0
+                      /   \   /  \
+                     -2   +4  +2  0...
+        */
+        return dp[i][flag]=Math.max(solution(i+1,flag,nums),(flag==1?nums[i]:-nums[i])+
+                                    solution(i+1,1-flag,nums));
+    }
+}

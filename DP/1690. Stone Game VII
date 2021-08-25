@@ -15,6 +15,7 @@ class Solution {
         
         if(dp[left][right]!=-1) return dp[left][right];
         
+        /*formula is Max(Total sum-left-max of remaining elements, Total sum-right-max of remaining elements)*/
         return dp[left][right]=Math.max(sum-s[left]-solution(left+1,right,s,sum-s[left],dp), sum-s[right]-solution(left,right-1,s,sum-s[right],dp));
     }
 }

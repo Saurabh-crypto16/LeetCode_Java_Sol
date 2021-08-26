@@ -1,0 +1,23 @@
+class Solution {
+    List<List<Integer>> ans;
+    public List<List<Integer>> permute(int[] nums) {
+        ans=new ArrayList<>();
+        generate(nums, new ArrayList<Integer>());
+        
+        return ans;
+    }
+    public void generate(int nums[], ArrayList<Integer> arr){
+        if(arr.size()==nums.length){
+            ans.add(new ArrayList<>(arr));
+            return;
+        }
+        
+        for(int i=0;i<nums.length;i++){
+            if(!arr.contains(nums[i])){
+                arr.add(nums[i]);
+                generate(nums, arr);
+                arr.remove(arr.size()-1);
+            }
+        }
+    }
+}

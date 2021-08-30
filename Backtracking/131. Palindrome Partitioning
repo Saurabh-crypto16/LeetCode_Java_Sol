@@ -1,0 +1,34 @@
+class Solution {
+    List<List<String>> ans;
+    public List<List<String>> partition(String s) {
+        ans=new ArrayList<>();
+        solution(s, new ArrayList<String>());
+        return ans;
+    }
+    public void solution(String s, List<String> res){
+        if(s.length()==0) {
+            ans.add(new ArrayList(res));
+            return;
+        }
+        
+        for(int j=0;j<s.length();j++){
+            String start=s.substring(0,j+1);
+            String ros=s.substring(j+1);
+            if(isPalin(start)){
+                res.add(start);
+                solution(ros,res);
+                res.remove(res.size()-1);
+            }
+        }
+    }
+    public boolean isPalin(String s){
+        if(s.length()==1) return true;
+        int i=0, j=s.length()-1;
+        while(i<=j){
+            if(s.charAt(i)!=s.charAt(j))    return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+}

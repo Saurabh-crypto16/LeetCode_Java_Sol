@@ -1,0 +1,53 @@
+class Solution {
+    List<String> ans=new ArrayList<>();
+    public List<String> ambiguousCoordinates(String s) {
+        s=s.substring(1,s.length()-1);  // "(xyz)" -> "xyz" removing brackets
+        for(int i=1;i<s.length();i++){  //partitioning strings at all points
+            helper(s.substring(0,i),s.substring(i));
+        }
+        return ans;
+    }
+    public void helper(String x, String y){
+        List<String> dotx=putDot(x);
+        List<String> doty=putDot(y);
+        
+        for(String dx: dotx){
+            if(isValid(dx)){
+                for(String dy: doty){
+                    if(isValid(dy)){
+                        ans.add("("+dx+", "+dy+")");    //(dx, dy)
+                    }
+                }
+            }
+        }
+    }
+    public List<String> putDot(String s){
+        //creating dots
+        List<String> dot=new ArrayList<>(); 
+        dot.add(s);
+        for(int i=1;i<s.length();i++){
+            dot.add(s.substring(0,i)+"."+s.substring(i));
+        }
+        return dot;
+    }
+    public boolean isValid(String s){
+        if(s.contains(".")){
+            String[] parts=s.split("\\.");  //breaking striing into 2 parts at the dot
+            
+            /* for 1st part of string the same conditions should be true as for string without a dot
+            and for 2nd part string should not end with 0*/
+            
+            if(!parts[0].equals("0") && parts[0].startsWith("0")) return false;
+            else   return !parts[1].endsWith("0");
+        }else{
+            
+            /* for no dot string there are 2 rules
+            1. number should be 0 or
+            2.number should not start with 0
+            */
+            
+            if(s.equals("0"))   return true;
+            else    return !s.startsWith("0");
+        }   
+    }
+}

@@ -1,0 +1,20 @@
+class Solution {
+    List<List<Integer>> ans;
+    public List<List<Integer>> combine(int n, int k) {
+        ans=new ArrayList<>();
+        solution(n,k,new ArrayList<Integer>(),1);
+        return ans;
+    }
+    public void solution(int n, int k, List<Integer> res, int j){
+        if(res.size()==k){
+            ans.add(new ArrayList(res));
+            return;
+        }
+        
+        for(int i=j;i<=n;i++){
+            res.add(i);
+            solution(n,k,res,i+1);
+            res.remove(res.size()-1);
+        }
+    } 
+}

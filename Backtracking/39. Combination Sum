@@ -1,0 +1,23 @@
+class Solution {
+    List<List<Integer>> ans;
+    public List<List<Integer>> combinationSum(int[] can, int t) {
+        ans=new ArrayList<>();
+        Arrays.sort(can);
+        solution(can,t,new ArrayList<Integer>(),0);
+        return ans;
+    }
+    public void solution(int[] nums, int t, List<Integer> res, int i){
+        if(t==0){
+            ans.add(new ArrayList(res));
+            return;
+        }
+        
+        if(t<0) return;
+        
+        for(int j=i;j<nums.length;j++){
+            res.add(nums[j]);
+            solution(nums,t-nums[j],res,j);
+            res.remove(res.size()-1);
+        }
+    }
+}

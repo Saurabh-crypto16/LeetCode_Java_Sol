@@ -1,0 +1,13 @@
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int posSum=0, negSum=0, ans=0;
+        for(int i: nums){
+            posSum+=i;
+            negSum+=i;
+            ans=Math.max(ans,Math.max(posSum,Math.abs(negSum)));
+            if(posSum<0)    posSum=0;
+            if(negSum>0)    negSum=0;
+        }
+        return ans;
+    }
+}
